@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block meta_title %}{{ post.meta_title|default:post.title }}{% endblock %}
+{% block og_title %}{{ post.meta_title|default:post.title }}{% endblock %}
+{% block meta_description %}{{ post.meta_description|default:DEFAULT_META_DESC }}{% endblock %}
+{% block og_image %}{{ post.og_image.url|default:DEFAULT_META_IMAGE }}{% endblock %}
+
+{% block content %}
+<article class="max-w-3xl mx-auto px-4 py-10">
+  <h1 class="text-3xl font-bold mb-2">{{ post.title }}</h1>
+  <div class="text-sm text-gray-500 mb-6">{{ post.publish_at|date:'Y-m-d' }} · {{ post.language|upper }}</div>
+  {% if post.cover %}
+    <img src="{{ post.cover.url }}" alt="{{ post.title }}" class="rounded mb-6">
+  {% endif %}
+  <div class="prose max-w-none">
+    {{ post.body|linebreaksbr }}
+  </div>
+  <div class="mt-6 text-sm text-gray-600">{% for t in post.tag_list %}<span class="mr-2">#{{ t }}</span>{% endfor %}</div>
+</article>
+{% endblock %}

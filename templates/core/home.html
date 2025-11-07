@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block meta_title %}Fyntralink — {% trans "WE ARE READY." %}{% endblock %}
+
+{% block content %}
+<section class="bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-8 items-center">
+    <div>
+      <h1 class="text-3xl md:text-4xl font-bold mb-4">{% trans "منصّة خدمات رقمية للشركات في السعودية والخليج" %}</h1>
+      <p class="text-lg text-gray-700 mb-6">{% blocktrans %}MSP، Zoho ERP/CRM، الأمن السيبراني والامتثال (NCA/PDPL)، وحماية الماركة والنطاقات—من مكان واحد.{% endblocktrans %}</p>
+      <div class="flex gap-3">
+        <a href="{% url 'core:services' %}" class="bg-black text-white px-4 py-2 rounded">{% trans "استكشف الخدمات" %}</a>
+        <a href="{% url 'core:contact' %}" class="border px-4 py-2 rounded">{% trans "اطلب عرض سعر" %}</a>
+      </div>
+    </div>
+    <div class="bg-white p-6 rounded shadow">
+      <h2 class="text-xl font-semibold mb-4">{% trans "تواصل معنا" %}</h2>
+      <form action="{% url 'leads:contact_submit' %}" method="post" class="grid gap-3">
+        {% csrf_token %}
+        <input name="name" required placeholder="{% trans 'الاسم' %}" class="border rounded px-3 py-2">
+        <input name="email" required type="email" placeholder="{% trans 'البريد الإلكتروني' %}" class="border rounded px-3 py-2">
+        <input name="phone" placeholder="{% trans 'الجوال' %}" class="border rounded px-3 py-2">
+        <textarea name="message" placeholder="{% trans 'كيف نساعدك؟' %}" class="border rounded px-3 py-2"></textarea>
+        <button class="bg-black text-white px-4 py-2 rounded" type="submit">{% trans "إرسال" %}</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h2 class="text-2xl font-bold mb-6">{% trans "الخدمات" %} / {% trans "Services" %}</h2>
+  <div class="grid md:grid-cols-4 gap-4">
+    <div class="border rounded p-4"><h3 class="font-semibold mb-2">MSP</h3><p class="text-sm text-gray-700">{% blocktrans %}إدارة ودعم تقنية المعلومات كخدمة متكاملة للشركات.{% endblocktrans %}</p></div>
+    <div class="border rounded p-4"><h3 class="font-semibold mb-2">Zoho ERP/CRM</h3><p class="text-sm text-gray-700">{% blocktrans %}تهيئة وربط منظومة زوهو لإدارة الأعمال والمبيعات.{% endblocktrans %}</p></div>
+    <div class="border rounded p-4"><h3 class="font-semibold mb-2">Cybersecurity & GRC</h3><p class="text-sm text-gray-700">{% blocktrans %}قوالب وضوابط امتثال NCA/PDPL مع تطبيقات أمنية.{% endblocktrans %}</p></div>
+    <div class="border rounded p-4"><h3 class="font-semibold mb-2">Brand/Domain Protection</h3><p class="text-sm text-gray-700">{% blocktrans %}حماية العلامة التجارية وأمن النطاقات والمراسلات.{% endblocktrans %}</p></div>
+  </div>
+</section>
+{% endblock %}
+

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-12">
+  <h1 class="text-3xl font-bold mb-4">{% trans "About" %} / {% trans "نبذة" %}</h1>
+  <p class="text-lg text-gray-700">
+    {% blocktrans %}
+    Fyntralink — {% endblocktrans %}{% trans "منصّة خدمات رقمية للشركات في السعودية والخليج" %}.
+  </p>
+  <p class="mt-4 text-gray-700">
+    {% blocktrans %}MSP bundles, Zoho ERP/CRM setup, Cybersecurity & GRC templates (NCA/PDPL), and Brand/Domain protection.{% endblocktrans %}
+  </p>
+  <p class="mt-4 text-gray-700">
+    {% blocktrans %}WE ARE READY.{% endblocktrans %}
+  </p>
+  
+</div>
+{% endblock %}
+

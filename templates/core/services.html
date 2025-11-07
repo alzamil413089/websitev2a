@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 py-12">
+  <h1 class="text-3xl font-bold mb-6">{% trans "الخدمات" %} / {% trans "Services" %}</h1>
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="border rounded p-6">
+      <h2 class="text-xl font-semibold mb-2">MSP</h2>
+      <p class="text-gray-700">{% blocktrans %}إدارة ودعم تقنية المعلومات كخدمة متكاملة للشركات.{% endblocktrans %}</p>
+    </div>
+    <div class="border rounded p-6">
+      <h2 class="text-xl font-semibold mb-2">Zoho ERP/CRM</h2>
+      <p class="text-gray-700">{% blocktrans %}تهيئة وربط منظومة زوهو لإدارة الأعمال والمبيعات.{% endblocktrans %}</p>
+    </div>
+    <div class="border rounded p-6">
+      <h2 class="text-xl font-semibold mb-2">Cybersecurity & GRC</h2>
+      <p class="text-gray-700">{% blocktrans %}قوالب وضوابط امتثال NCA/PDPL مع تطبيقات أمنية.{% endblocktrans %}</p>
+    </div>
+    <div class="border rounded p-6">
+      <h2 class="text-xl font-semibold mb-2">Brand/Domain Protection</h2>
+      <p class="text-gray-700">{% blocktrans %}حماية العلامة التجارية وأمن النطاقات والمراسلات.{% endblocktrans %}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

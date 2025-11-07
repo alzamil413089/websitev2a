@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-10">
+  <h1 class="text-3xl font-bold mb-6">{% trans "Blog" %}</h1>
+  {% if active_tag %}
+    <div class="mb-4 text-sm text-gray-600">{% trans "Tag" %}: {{ active_tag }}</div>
+  {% endif %}
+  <div class="grid md:grid-cols-3 gap-6">
+    {% for p in posts %}
+      <a href="{% url 'blog:detail' slug=p.slug %}" class="border rounded p-4 block hover:shadow">
+        <div class="text-xs text-gray-500">{{ p.publish_at|date:'Y-m-d' }}</div>
+        <h2 class="text-xl font-semibold">{{ p.title }}</h2>
+        <p class="text-gray-700 text-sm mt-2">{{ p.excerpt|default:p.body|truncatechars:140 }}</p>
+        <div class="mt-3 text-xs text-gray-600">{% for t in p.tag_list %}<span class="mr-2">#{{ t }}</span>{% endfor %}</div>
+      </a>
+    {% empty %}
+      <div class="text-gray-600">{% trans "No posts yet." %}</div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+

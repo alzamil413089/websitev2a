@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-12">
+  <h1 class="text-3xl font-bold mb-6">{% trans "Contact" %} / {% trans "تواصل" %}</h1>
+  {% if request.GET.ok %}
+    <div class="p-3 rounded bg-green-50 text-green-700 mb-4">{% trans "تم الإرسال بنجاح." %}</div>
+  {% endif %}
+  <form action="{% url 'leads:contact_submit' %}" method="post" class="grid gap-3">
+    {% csrf_token %}
+    <input name="name" required placeholder="{% trans 'الاسم' %}" class="border rounded px-3 py-2">
+    <input name="email" required type="email" placeholder="{% trans 'البريد الإلكتروني' %}" class="border rounded px-3 py-2">
+    <input name="phone" placeholder="{% trans 'الجوال' %}" class="border rounded px-3 py-2">
+    <textarea name="message" placeholder="{% trans 'كيف نساعدك؟' %}" class="border rounded px-3 py-2"></textarea>
+    <button class="bg-black text-white px-4 py-2 rounded" type="submit">{% trans "إرسال" %}</button>
+  </form>
+</div>
+{% endblock %}
+

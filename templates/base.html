@@ -1,0 +1,52 @@
+{% load i18n static %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_CODE == 'ar' %}rtl{% else %}ltr{% endif %}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block meta_title %}{{ DEFAULT_META_TITLE }}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{{ DEFAULT_META_DESC }}{% endblock %}">
+  <meta property="og:title" content="{% block og_title %}{{ DEFAULT_META_TITLE }}{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}{{ DEFAULT_META_DESC }}{% endblock %}">
+  <meta property="og:image" content="{% block og_image %}{{ DEFAULT_META_IMAGE }}{% endblock %}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" type="application/rss+xml" title="Fyntralink RSS" href="/rss.xml">
+  {% if request %}
+  <link rel="canonical" href="{{ request.build_absolute_uri }}">
+  {% endif %}
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-900">
+  <header class="border-b">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="{% url 'core:home' %}" class="font-bold text-xl">Fyntralink</a>
+      <nav class="space-x-4 space-x-reverse">
+        <a class="hover:underline" href="{% url 'core:services' %}">{% trans "Services" %}/{% trans "الخدمات" %}</a>
+        <a class="hover:underline" href="{% url 'blog:list' %}">{% trans "Blog" %}</a>
+        <a class="hover:underline" href="{% url 'core:contact' %}">{% trans "Contact" %}/{% trans "تواصل" %}</a>
+      </nav>
+      <form action="/i18n/setlang/" method="post" class="flex items-center gap-2">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <button name="language" value="ar" type="submit" class="px-2 py-1 border rounded {% if request.LANGUAGE_CODE == 'ar' %}bg-gray-200{% endif %}">العربية</button>
+        <button name="language" value="en" type="submit" class="px-2 py-1 border rounded {% if request.LANGUAGE_CODE == 'en' %}bg-gray-200{% endif %}">EN</button>
+      </form>
+    </div>
+  </header>
+
+  <main class="min-h-[60vh]">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="border-t py-8">
+    <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-4 items-center">
+      <div class="text-sm text-gray-600">Fyntralink — {% trans "WE ARE READY." %}</div>
+      <form action="{% url 'leads:newsletter_subscribe' %}" method="post" class="flex gap-2 justify-end">
+        {% csrf_token %}
+        <input required name="email" type="email" placeholder="{% trans 'Your email' %}" class="border rounded px-3 py-2 w-64">
+        <button class="bg-black text-white px-4 py-2 rounded" type="submit">{% trans "Subscribe" %}</button>
+      </form>
+    </div>
+  </footer>
+</body>
+</html>
